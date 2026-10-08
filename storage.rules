@@ -1,0 +1,37 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // 1. Foto presensi selfie (masuk, keluar, dan giat patroli)
+    match /presensi/{nik}/{allPaths=**} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && (
+        request.auth.token.role == 'user' ||
+        request.auth.token.role == 'admin' ||
+        request.auth.token.role == 'superadmin'
+      ) && request.resource.size < 5 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*');
+    }
+
+    // 2. Lampiran Surat Izin / Surat Sakit (Pusat Permohonan Izin)
+    match /leaves/{nik}/{allPaths=**} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && (
+        request.auth.token.role == 'user' ||
+        request.auth.token.role == 'admin' ||
+        request.auth.token.role == 'superadmin'
+      ) && request.resource.size < 5 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*');
+    }
+
+    // 3. Foto profil atau dokumen identitas anggota Linmas
+    match /linmas/{nik}/{allPaths=**} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && (
+        request.auth.token.role == 'admin' ||
+        request.auth.token.role == 'superadmin'
+      ) && request.resource.size < 5 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*');
+    }
+  }
+}
+

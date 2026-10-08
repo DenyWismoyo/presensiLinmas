@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🦺 Presensi Linmas (Sistem Keamanan & Presensi Operasional)
 
-## Getting Started
+Aplikasi Presensi Digital PWA (Progressive Web App) dan Sistem Manajemen Operasional Satlinmas (Satuan Perlindungan Masyarakat) berbasis Next.js 16, React 19, Firebase Firestore, dan Cloud Functions.
 
-First, run the development server:
+---
 
+## 🌟 Fitur Utama
+
+- **PWA Mobile-First Presensi**: Tampilan borderless yang elegan dan thumb-friendly untuk personel Linmas di lapangan.
+- **Geofencing & Validasi Lokasi GPS**: Menggunakan kalkulasi Haversine Formula terverifikasi server untuk mencegah spoofing/mock location.
+- **Dokumentasi Visual 3-Point (SENAPATI Pattern)**: Validasi selfie check-in, giat patroli posko, dan selfie check-out dinas.
+- **Kartu Tanda Anggota (KTA) Digital**: Profil anggota lengkap dengan verifikasi QR Code resmi.
+- **Sinyal Darurat Lapangan (SOS Panic Button)**: Mengirimkan peringatan bahaya/insiden secara instan ke Admin Posko.
+- **Dashboard Admin & Super Admin**:
+  - Ringkasan KPI dan grafik analitik kehadiran.
+  - Log kehadiran dengan foto verifikasi selfie.
+  - Manajemen jadwal piket dan pembagian regu dinas.
+  - Rekapitulasi honorarium otomatis per shift dengan ekspor laporan.
+  - Pemantauan dan penanganan alert darurat real-time.
+  - Siaran pengumuman dan instruksi resmi posko.
+
+---
+
+## 🏗️ Tech Stack
+
+- **Frontend**: Next.js 16 (App Router, Turbopack), React 19, TypeScript
+- **Styling**: Vanilla CSS (Custom Enterprise Design System, Strictly No Tailwind/MUI)
+- **Backend & Database**: Firebase Firestore (Native Mode), Firebase Auth, Firebase Storage, Cloud Functions v2
+- **Keamanan**: Role-Based Access Control (RBAC), Custom Claims, Strict Security Rules, Anti-manipulasi server timestamps
+
+---
+
+## 🚀 Memulai Pengembangan
+
+### 1. Prasyarat
+- Node.js versi 20+
+- Akun Firebase dengan project aktif
+
+### 2. Instalasi Dependensi
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Instal dependensi aplikasi utama
+npm install
+
+# Instal dependensi Cloud Functions
+cd functions
+npm install
+cd ..
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 3. Menjalankan Server Pengembangan
+```bash
+npm run dev
+```
+Buka [http://localhost:3000](http://localhost:3000) pada browser Anda.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 4. Build Produksi
+```bash
+npm run build
+npm start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🔒 Keamanan & Kebijakan Data
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+File kredensial sensitif seperti `serviceAccountKey.json`, private keys, dan file environment tidak disertakan dalam repositori ini demi keamanan data operasional.

@@ -1,0 +1,25 @@
+@import './variables.css';
+@import './components/ui.css';
+@import './pages/presensi.css';
+@import './pages/login.css';
+@import './pages/dashboard.css';
+
+/* Basic Resets */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

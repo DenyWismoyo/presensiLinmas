@@ -1,0 +1,202 @@
+rules_version = '2';
+
+// ===============================================================
+// Assumed Data Model
+// ===============================================================
+//
+// Collection: linmas
+// Document ID: {nik} (16 digits string)
+// Fields:
+//   - nik: string (required, 16 chars)
+//   - nama: string (required, 1-100 chars)
+//   - unitId: string (required, 1-50 chars)
+//   - regupId: string (optional, 1-50 chars)
+//   - jabatan: string (optional, 1-50 chars)
+//   - telepon: string (optional, 0-25 chars)
+//   - aktif: bool (required)
+//   - deviceIds: list (optional, max 10 items)
+//   - foto: string (optional URL)
+//   - createdAt: timestamp (immutable)
+//   - updatedAt: timestamp
+//
+// Collection: presensi
+// Document ID: {presensiId} (deterministic: {nik}_{tanggal}_{shiftId} or auto-id)
+// Fields:
+//   - nik: string, nama: string, unitId: string, regupId: string, shiftId: string
+//   - tanggal: string (YYYY-MM-DD), waktuMasuk: timestamp, lokasiMasuk: geopoint
+//   - status: string (hadir, terlambat, alpa, izin, sakit)
+//   - antiManipulasi: map (deviceId, accuracy, isMockLocation, clientTimeDiff)
+//   - Write Rule: Strictly via Cloud Functions Admin SDK (write: false for client)
+//
+// Collection: units
+// Document ID: {unitId}
+// Fields:
+//   - nama: string, alamat: string, radius: number, adminUid: string
+//   - location: geopoint, createdAt: timestamp, updatedAt: timestamp
+//
+// Collection: regups, shifts, jadwal
+// Operational unit schedules & shifts
+//
+// Collection: alerts
+// Emergency SOS & Anti-manipulation security incident logs
+//
+// Collection: announcements
+// Posko broadcast notifications to active personnel
+//
+// Collection: settings
+// Operational parameters (toleransi keterlambatan, geofence default, honor rate)
+//
+// ===============================================================
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function getRole() {
+      return request.auth.token.role;
+    }
+
+    function getUnitId() {
+      return request.auth.token.unitId;
+    }
+
+    function getNik() {
+      return request.auth.token.nik;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && getRole() == 'admin';
+    }
+
+    function isSuperAdmin() {
+      return isSignedIn() && getRole() == 'superadmin';
+    }
+
+    function isLinmas() {
+      return isSignedIn() && getRole() == 'user';
+    }
+
+    function isAdminOfUnit(targetUnitId) {
+      return isAdmin() && getUnitId() == targetUnitId;
+    }
+
+    // ===============================================================
+    // 1. Linmas: Data Personel Satlinmas
+    // ===============================================================
+    match /linmas/{nik} {
+      // Linmas hanya baca profil miliknya; Admin membaca unitnya; Super Admin membaca semua
+      allow read: if (isLinmas() && getNik() == nik)
+        || (isAdmin() && (resource == null || isAdminOfUnit(resource.data.unitId)))
+        || isSuperAdmin();
+
+      // Admin hanya membuat data personel di unitnya sendiri; Super Admin bebas
+      allow create: if (isAdmin() && isAdminOfUnit(request.resource.data.unitId))
+        || isSuperAdmin();
+
+      // Admin mengupdate hanya di unitnya; NIK bersifat immutable (tidak boleh diubah)
+      allow update: if (
+          (isAdmin() && isAdminOfUnit(resource.data.unitId) && isAdminOfUnit(request.resource.data.unitId))
+          || isSuperAdmin()
+        ) && (!('nik' in request.resource.data) || request.resource.data.nik == resource.data.nik);
+
+      allow delete: if (isAdmin() && isAdminOfUnit(resource.data.unitId))
+        || isSuperAdmin();
+    }
+
+    // ===============================================================
+    // 2. Presensi: Log Kehadiran & Patroli (Anti-Manipulasi Server-Only)
+    // ===============================================================
+    match /presensi/{id} {
+      // Baca log presensi: Linmas hanya data miliknya; Admin unitnya; Super Admin semua
+      allow read: if (isLinmas() && resource.data.nik == getNik())
+        || (isAdmin() && isAdminOfUnit(resource.data.unitId))
+        || isSuperAdmin();
+
+      // Client TIDAK DIIZINKAN menulis langsung ke koleksi presensi
+      // Seluruh operasi write wajib lewat Cloud Function (verifikasi GPS, Server Timestamp & Face)
+      allow write: if false;
+    }
+
+    // ===============================================================
+    // 3. Units: Posko Satlinmas & Geofence Coordinates
+    // ===============================================================
+    match /units/{unitId} {
+      // Semua personel terotentikasi dapat membaca data posko untuk validasi jarak Geofencing
+      allow read: if isSignedIn();
+      // Hanya Super Admin yang memiliki wewenang konfigurasi posko unit
+      allow write: if isSuperAdmin();
+    }
+
+    // ===============================================================
+    // 4. Regups: Regu / Pleton Linmas
+    // ===============================================================
+    match /regups/{id} {
+      allow read: if isSignedIn();
+      allow create: if (isAdmin() && isAdminOfUnit(request.resource.data.unitId)) || isSuperAdmin();
+      allow update, delete: if (isAdmin() && isAdminOfUnit(resource.data.unitId)) || isSuperAdmin();
+    }
+
+    // ===============================================================
+    // 5. Shifts: Jam Kerja & Batas Toleransi
+    // ===============================================================
+    match /shifts/{id} {
+      allow read: if isSignedIn();
+      allow create: if (isAdmin() && isAdminOfUnit(request.resource.data.unitId)) || isSuperAdmin();
+      allow update, delete: if (isAdmin() && isAdminOfUnit(resource.data.unitId)) || isSuperAdmin();
+    }
+
+    // ===============================================================
+    // 6. Jadwal: Penugasan Regu per Tanggal
+    // ===============================================================
+    match /jadwal/{id} {
+      allow read: if isSignedIn();
+      allow create: if (isAdmin() && isAdminOfUnit(request.resource.data.unitId)) || isSuperAdmin();
+      allow update, delete: if (isAdmin() && isAdminOfUnit(resource.data.unitId)) || isSuperAdmin();
+    }
+
+    // ===============================================================
+    // 7. Alerts: Peringatan Darurat SOS & Keamanan
+    // ===============================================================
+    match /alerts/{id} {
+      allow read: if (isLinmas() && resource.data.nik == getNik())
+        || (isAdmin() && isAdminOfUnit(resource.data.unitId))
+        || isSuperAdmin();
+
+      // Linmas dapat mengirim sinyal darurat SOS untuk unitnya sendiri
+      allow create: if (isLinmas() && request.resource.data.nik == getNik() && isAdminOfUnit(request.resource.data.unitId))
+        || (isAdmin() && isAdminOfUnit(request.resource.data.unitId))
+        || isSuperAdmin();
+
+      // Admin & Super Admin dapat menyelesaikan (resolve) status alert
+      allow update: if (isAdmin() && isAdminOfUnit(resource.data.unitId))
+        || isSuperAdmin();
+
+      allow delete: if isSuperAdmin();
+    }
+
+    // ===============================================================
+    // 8. Announcements: Pengumuman & Instruksi Posko
+    // ===============================================================
+    match /announcements/{id} {
+      allow read: if isSignedIn();
+      allow create: if (isAdmin() && isAdminOfUnit(request.resource.data.unitId)) || isSuperAdmin();
+      allow update, delete: if (isAdmin() && isAdminOfUnit(resource.data.unitId)) || isSuperAdmin();
+    }
+
+    // ===============================================================
+    // 9. Settings: Konfigurasi Sistem Operasional
+    // ===============================================================
+    match /settings/{settingId} {
+      allow read: if isSignedIn();
+      allow create, update: if isAdmin() || isSuperAdmin();
+      allow delete: if isSuperAdmin();
+    }
+  }
+}

@@ -1,0 +1,640 @@
+/* ==========================================================================
+   PRESENSI MOBILE PWA - BORDERLESS ELEGAN DESIGN SYSTEM
+   ========================================================================== */
+
+.presensi-layout {
+  max-width: 440px;
+  margin: 0 auto;
+  min-height: 100dvh;
+  background: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.08);
+}
+
+/* Header: Sleek, Integrated Top Bar */
+.presensi-header {
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+  color: white;
+  padding: var(--space-5) var(--space-4) calc(var(--space-5) + 4px);
+  border-bottom-left-radius: 28px;
+  border-bottom-right-radius: 28px;
+  box-shadow: 0 12px 30px -10px rgba(15, 23, 42, 0.25);
+}
+
+.presensi-header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: var(--space-2);
+}
+
+.presensi-user-info {
+  text-align: left;
+}
+
+.presensi-greeting {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+}
+
+.presensi-regu-sub {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.regu-chip {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.nik-chip {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.presensi-header-nav {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.header-pill-btn {
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  border: none;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 6px 12px;
+  font-size: 11px;
+  border-radius: 9999px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 150ms ease;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.header-pill-btn:hover,
+.header-pill-btn:active {
+  background: rgba(255, 255, 255, 0.24);
+  transform: translateY(-1px);
+}
+
+/* Main Body - Flowing, Borderless Canvas */
+.presensi-body {
+  padding: var(--space-5) var(--space-4) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  flex: 1;
+}
+
+/* ==========================================================================
+   HERO SECTION (JAM & GEOFENCING RADAR) - BORDERLESS
+   ========================================================================== */
+.presensi-hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-2) 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.date-display {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #64748b;
+  margin-bottom: 2px;
+}
+
+.clock-display {
+  text-align: center;
+  font-size: 3.4rem;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+  margin: 6px 0 16px;
+}
+
+/* Borderless Status Pill */
+.location-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  box-shadow: none;
+  max-width: 100%;
+  transition: all 200ms ease;
+}
+
+.location-status.dalam-jangkauan {
+  background: rgba(16, 185, 129, 0.12);
+  color: #047857;
+}
+
+.location-status.luar-jangkauan {
+  background: rgba(239, 68, 68, 0.1);
+  color: #b91c1c;
+}
+
+.location-status.loading {
+  background: rgba(245, 158, 11, 0.12);
+  color: #b45309;
+}
+
+/* GPS & Distance Meter */
+.gps-indicator-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 10px;
+  font-size: 11px;
+  color: #64748b;
+}
+
+.gps-label {
+  font-size: 11px;
+  color: #64748b;
+}
+
+.gps-value {
+  font-size: 11px;
+  font-weight: 600;
+  color: #475569;
+}
+
+.gps-warning {
+  color: #b45309;
+  font-size: 11px;
+  text-align: center;
+  margin-top: 6px;
+  background: rgba(245, 158, 11, 0.1);
+  padding: 4px 12px;
+  border-radius: 9999px;
+  display: inline-block;
+}
+
+.distance-info {
+  font-size: 12px;
+  color: #64748b;
+  text-align: center;
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   INSTRUKSI POSKO (ANNOUNCEMENT) - BORDERLESS
+   ========================================================================== */
+.announcement-banner {
+  background: linear-gradient(135deg, rgba(30, 58, 138, 0.05) 0%, rgba(59, 130, 246, 0.08) 100%);
+  border-radius: 20px;
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border: none;
+}
+
+.announcement-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.announcement-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #1e3a8a;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.announcement-badge {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: rgba(30, 58, 138, 0.1);
+  color: #1e3a8a;
+  padding: 2px 8px;
+  border-radius: 9999px;
+}
+
+.announcement-text {
+  font-size: 12px;
+  color: #1e293b;
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* ==========================================================================
+   DUTY STATUS SECTION - BORDERLESS & ELEGAN
+   ========================================================================== */
+.duty-status-section {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border: none;
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04);
+}
+
+.duty-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.section-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.duty-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 12px 14px;
+  background: #f8fafc;
+  border-radius: 16px;
+  border: none;
+}
+
+.duty-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.duty-label {
+  font-size: 11px;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+.duty-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.activity-summary-box {
+  background: rgba(16, 185, 129, 0.08);
+  border-radius: 16px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: none;
+}
+
+.activity-summary-text {
+  flex: 1;
+  font-size: 12px;
+  color: #064e3b;
+  line-height: 1.4;
+}
+
+.three-point-photos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.photo-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.photo-item img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 14px;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.photo-item span {
+  font-size: 10px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   ACTION BUTTONS - BORDERLESS HERO ACTIONS
+   ========================================================================== */
+.presensi-actions-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.btn-presensi-masuk {
+  width: 100%;
+  min-height: 60px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+  color: white;
+  border: none;
+  border-radius: 22px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px -4px rgba(29, 78, 216, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: transform 150ms ease, box-shadow 150ms ease, opacity 150ms ease;
+}
+
+.btn-presensi-masuk:active:not(:disabled) {
+  transform: scale(0.98);
+  box-shadow: 0 4px 12px -2px rgba(29, 78, 216, 0.3);
+}
+
+.btn-presensi-masuk:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  background: #94a3b8;
+  box-shadow: none;
+}
+
+.btn-presensi-keluar {
+  width: 100%;
+  min-height: 60px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+  color: white;
+  border: none;
+  border-radius: 22px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px -4px rgba(16, 185, 129, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: transform 150ms ease, box-shadow 150ms ease, opacity 150ms ease;
+}
+
+.btn-presensi-keluar:active:not(:disabled) {
+  transform: scale(0.98);
+  box-shadow: 0 4px 12px -2px rgba(16, 185, 129, 0.3);
+}
+
+.btn-presensi-keluar:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  background: #94a3b8;
+  box-shadow: none;
+}
+
+.btn-presensi-giat {
+  width: 100%;
+  min-height: 50px;
+  font-size: 14px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  color: white;
+  border: none;
+  border-radius: 18px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px -2px rgba(2, 132, 199, 0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.btn-presensi-giat:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.btn-presensi-leave {
+  width: 100%;
+  min-height: 48px;
+  font-size: 14px;
+  font-weight: 600;
+  background: rgba(245, 158, 11, 0.12);
+  color: #b45309;
+  border: none;
+  border-radius: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color 150ms ease, transform 150ms ease;
+}
+
+.btn-presensi-leave:hover {
+  background: rgba(245, 158, 11, 0.18);
+}
+
+.btn-presensi-leave:active {
+  transform: scale(0.98);
+}
+
+/* SOS Panic Trigger */
+.sos-container {
+  margin-top: 4px;
+}
+
+.btn-sos-trigger {
+  width: 100%;
+  min-height: 50px;
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  color: white;
+  border: none;
+  border-radius: 18px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 8px 20px -2px rgba(220, 38, 38, 0.32);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.btn-sos-trigger:active {
+  transform: scale(0.98);
+  box-shadow: 0 4px 10px rgba(220, 38, 38, 0.25);
+}
+
+/* Logout Button: Borderless Ghost */
+.btn-presensi-logout {
+  width: 100%;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color: #ef4444;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 150ms ease;
+  text-align: center;
+}
+
+.btn-presensi-logout:hover {
+  background: rgba(239, 68, 68, 0.08);
+}
+
+/* Feedback message */
+.presensi-feedback {
+  padding: 10px 16px;
+  border-radius: 14px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+}
+
+.hidden-input {
+  display: none;
+}
+
+.compression-info-card {
+  padding: var(--space-3);
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.compression-success-title {
+  font-size: var(--text-xs);
+  color: var(--color-success);
+  font-weight: var(--font-bold);
+}
+
+.compression-desc {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+/* SOS Modal Styling */
+.sos-modal-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.sos-type-btn {
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--text-xs);
+  font-weight: var(--font-semibold);
+  color: var(--color-text);
+  transition: all var(--transition-fast);
+}
+
+.sos-type-btn.active {
+  border-color: #dc2626;
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+.sos-type-btn span.emoji {
+  font-size: 24px;
+}
+
+.sos-warning-note {
+  font-size: var(--text-xs);
+  color: #991b1b;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-3);
+}
+
+.btn-sos-confirm {
+  width: 100%;
+  min-height: 48px;
+  background: #dc2626;
+  color: white;
+  border: none;
+  border-radius: var(--radius-lg);
+  font-weight: var(--font-bold);
+  font-size: var(--text-base);
+  cursor: pointer;
+}
+
+.btn-sos-confirm:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.feedback-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.btn-upload-file {
+  width: 100%;
+  cursor: pointer;
+}

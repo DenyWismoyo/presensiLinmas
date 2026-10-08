@@ -1,0 +1,15 @@
+# Cloud Functions Dependencies & Output
+node_modules/
+lib/
+
+# Credentials & Private Keys (CRITICAL)
+*.pem
+*.key
+*.p12
+serviceAccountKey.json
+*serviceAccount*.json
+
+# Logs
+*.log
+firebase-debug.log*
+firebase-debug.*.log

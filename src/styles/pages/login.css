@@ -1,0 +1,219 @@
+.login-layout {
+  max-width: 430px;
+  margin: 0 auto;
+  min-height: 100dvh;
+  background: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--space-6);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: var(--space-8);
+}
+
+.login-header h1 {
+  font-size: var(--text-3xl);
+  color: var(--color-primary);
+  margin-bottom: var(--space-2);
+}
+
+.login-header p {
+  color: var(--color-text-muted);
+}
+
+.login-form {
+  background: var(--color-surface);
+  padding: var(--space-6);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.form-group label {
+  font-weight: var(--font-medium);
+  font-size: var(--text-sm);
+  color: var(--color-text);
+}
+
+.form-group input {
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--text-base);
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.form-group input:focus {
+  border-color: var(--color-primary);
+}
+
+.btn-login {
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: var(--text-base);
+  font-weight: var(--font-bold);
+  cursor: pointer;
+  transition: opacity var(--transition-fast);
+}
+
+.btn-login:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.btn-login.btn-admin {
+  background: #0f172a;
+}
+
+.btn-login.btn-admin:hover:not(:disabled) {
+  background: #1e293b;
+}
+
+.login-footer {
+  margin-top: var(--space-6);
+  text-align: center;
+}
+
+.login-footer a {
+  color: var(--color-primary);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+}
+
+.login-footer a.link-dark {
+  color: #0f172a;
+}
+
+/* Role Selector Tabs */
+.role-tabs {
+  display: flex;
+  background: #f1f5f9;
+  border-radius: var(--radius-lg);
+  padding: 4px;
+  margin-bottom: var(--space-4);
+  gap: 4px;
+}
+
+.role-tab-btn {
+  flex: 1;
+  padding: var(--space-2) var(--space-3);
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-md);
+  font-size: var(--text-xs);
+  font-weight: var(--font-semibold);
+  color: #64748b;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: center;
+}
+
+.role-tab-btn:hover {
+  color: #0f172a;
+}
+
+.role-tab-btn.active {
+  background: white;
+  color: #0f172a;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-superadmin {
+  background: linear-space, #1e1b4b;
+  background-color: #1e1b4b;
+  color: #fde047;
+}
+
+.btn-superadmin:hover:not(:disabled) {
+  background-color: #312e81;
+}
+
+/* Quick Fill / Quick Shortcut Box */
+.quick-access-box {
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  margin-top: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.quick-access-header {
+  font-size: 11px;
+  font-weight: var(--font-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.quick-btn-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+}
+
+.btn-quick-shortcut {
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  background: white;
+  border-radius: var(--radius-md);
+  font-size: var(--text-xs);
+  font-weight: var(--font-medium);
+  color: #1e293b;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.btn-quick-shortcut:hover {
+  border-color: var(--color-primary);
+  background: #f0fdf4;
+}
+
+.btn-quick-shortcut.superadmin-quick:hover {
+  border-color: #eab308;
+  background: #fefce8;
+}
+
+.btn-quick-shortcut span.quick-sub {
+  font-size: 10px;
+  color: #94a3b8;
+  font-weight: normal;
+}
+
+.footer-nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.footer-nav-dot {
+  color: #cbd5e1;
+  font-size: 10px;
+}
+

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <defs>
+    <linearGradient id="linmasBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#166534" />
+      <stop offset="100%" stop-color="#14532d" />
+    </linearGradient>
+    <linearGradient id="goldAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#facc15" />
+      <stop offset="100%" stop-color="#ca8a04" />
+    </linearGradient>
+  </defs>
+  <rect width="192" height="192" rx="40" fill="url(#linmasBg)" />
+  <!-- Perisai Keamanan -->
+  <path d="M96 28 L146 50 C146 100 120 138 96 156 C72 138 46 100 46 50 Z" fill="#15803d" stroke="url(#goldAccent)" stroke-width="4" />
+  <!-- Bintang Pusat -->
+  <polygon points="96,48 102,64 118,64 105,74 110,90 96,80 82,90 87,74 74,64 90,64" fill="url(#goldAccent)" />
+  <!-- Pin Lokasi & Centang Presensi -->
+  <circle cx="96" cy="114" r="18" fill="#facc15" />
+  <path d="M88 114 L94 120 L106 108" fill="none" stroke="#14532d" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+</svg>
